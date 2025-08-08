@@ -40,7 +40,9 @@ exports.UserRoute = void 0;
 const express_1 = __importDefault(require("express"));
 const UserController = __importStar(require("./user.controller"));
 const userRoute = express_1.default.Router();
-userRoute.get('/', UserController.testConDbPrismaGet);
-userRoute.post('/', UserController.testConDbPrismaPost);
+userRoute
+    .get("/", UserController.httpGetAllUser)
+    .post("/", UserController.httpAddNewUser)
+    .put();
 exports.UserRoute = userRoute;
 //# sourceMappingURL=user.routes.js.map

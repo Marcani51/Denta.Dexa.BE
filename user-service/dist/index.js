@@ -15,10 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
 const app_1 = require("./app");
 const PORT = process.env.PORT || 5850;
+const SERVICE = process.env.USERSERVICE;
 function startServer() {
     return __awaiter(this, void 0, void 0, function* () {
         http_1.default.createServer(app_1.App).listen(PORT, () => {
-            console.log("User-service starting");
+            console.log(`${SERVICE} starting`);
             console.log(`Listen to PORT ${PORT} ....`);
         });
     });

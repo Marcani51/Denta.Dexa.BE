@@ -32,15 +32,21 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRoute = void 0;
-const express_1 = __importDefault(require("express"));
-const UserController = __importStar(require("./user.controller"));
-const userRoute = express_1.default.Router();
-userRoute.get('/', UserController.testConDbPrismaGet);
-userRoute.post('/', UserController.testConDbPrismaPost);
-exports.UserRoute = userRoute;
-//# sourceMappingURL=user.routes.js.map
+exports.validateUser = void 0;
+const modelData = __importStar(require("../models"));
+const commonfunction_1 = require("../utilities/commonfunction");
+//#region user validation
+const validateUser = (req, res, next) => {
+    const { error } = modelData.userValidationSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map((er) => er.message).join(",");
+        return next(new commonfunction_1.ExpressError(msg, 400));
+    }
+    else {
+        next();
+    }
+};
+exports.validateUser = validateUser;
+//#endregion
+//# sourceMappingURL=validator.js.map

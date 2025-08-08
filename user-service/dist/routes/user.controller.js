@@ -9,18 +9,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.httpCreateUser = exports.httpGetUser = void 0;
-let users = [];
-const httpGetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({
-        error: "User Doesn't exist",
+exports.testConDbPrismaPost = exports.testConDbPrismaGet = void 0;
+const prisma_1 = require("../../../generated/prisma");
+const prisma = new prisma_1.PrismaClient();
+const testConDbPrismaGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield prisma.user.findMany();
+    res.send(user);
+});
+exports.testConDbPrismaGet = testConDbPrismaGet;
+const testConDbPrismaPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma.user.create({
+        data: {
+            name: 'Alice',
+            email: 'alice@prisma.io',
+            posts: {
+                create: { title: 'Hello World' },
+            },
+            profile: {
+                create: { bio: 'I like turtles' },
+            },
+        },
     });
+    const allUsers = yield prisma.user.findMany({
+        include: {
+            posts: true,
+            profile: true,
+        },
+    });
+    res.send(allUsers, { depth: null });
 });
-exports.httpGetUser = httpGetUser;
-const httpCreateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = req.body;
-    console.log(user);
-    res.status(201).json(user);
-});
-exports.httpCreateUser = httpCreateUser;
+exports.testConDbPrismaPost = testConDbPrismaPost;
 //# sourceMappingURL=user.controller.js.map

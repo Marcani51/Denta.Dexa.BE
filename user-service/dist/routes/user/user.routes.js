@@ -39,8 +39,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRoute = void 0;
 const express_1 = __importDefault(require("express"));
 const UserController = __importStar(require("./user.controller"));
+const validator = __importStar(require("../../middleware/validator"));
 const userRoute = express_1.default.Router();
-userRoute.get('/', UserController.testConDbPrismaGet);
-userRoute.post('/', UserController.testConDbPrismaPost);
+userRoute.put("/:id", validator.validateUser, UserController.httpUpdateUser);
+userRoute
+    .get("/", UserController.httpGetAllUser)
+    .post("/", validator.validateUser, UserController.httpAddNewUser);
 exports.UserRoute = userRoute;
 //# sourceMappingURL=user.routes.js.map

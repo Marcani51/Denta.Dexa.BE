@@ -1,5 +1,5 @@
 import express from 'express'
-import { UserRoute } from "../routes/user.routes";
+import { UserRoute } from "../routes/user/user.routes";
 
 const api = express.Router()
 
