@@ -20,7 +20,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dataUserExist = exports.getAllUser = exports.updateUser = exports.saveUser = void 0;
+exports.getUserById = exports.getAllUser = exports.updateUser = exports.saveUser = void 0;
 const prisma_1 = require("../../../../generated/prisma");
 const prisma = new prisma_1.PrismaClient();
 //#region
@@ -71,18 +71,19 @@ const getAllUser = (skip, limit) => __awaiter(void 0, void 0, void 0, function* 
     return prisma.user.findMany({
         skip: skip,
         take: limit,
+        where: { isActive: true },
         orderBy: {
             createdDate: 'desc'
         }
     });
 });
 exports.getAllUser = getAllUser;
-const dataUserExist = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+const getUserById = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const exist = yield prisma.user.findUnique({
         where: { id: userId },
         include: { detail: true }
     });
     return exist;
 });
-exports.dataUserExist = dataUserExist;
+exports.getUserById = getUserById;
 //# sourceMappingURL=user.model.js.map

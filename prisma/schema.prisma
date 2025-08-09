@@ -9,8 +9,8 @@ datasource db {
 }
 
 enum Gender {
-  MALE     // 1
-  FEMALE   // 2
+  MALE // 1
+  FEMALE // 2
 }
 
 model User {
@@ -54,9 +54,10 @@ model Role {
 }
 
 model Access {
-  id     String @id @default(uuid())
+  id     String  @id @default(uuid())
   view   Boolean
   edit   Boolean
-  roleId String @unique
-  role   Role   @relation(fields: [roleId], references: [id])
+  absent Boolean
+  roleId String  @unique
+  role   Role    @relation(fields: [roleId], references: [id])
 }
