@@ -15,8 +15,8 @@ enum Gender {
 
 model User {
   id          String     @id @default(uuid())
-  username    String
-  password    String
+  username    String     @unique
+  password    String     @unique
   email       String     @unique
   roleId      String?    @unique
   detailId    String     @unique
