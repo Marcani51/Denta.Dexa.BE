@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateUser = void 0;
+exports.validateRole = exports.validateUser = void 0;
 const modelData = __importStar(require("../models"));
 const commonfunction_1 = require("../utilities/commonfunction");
 //#region user validation
@@ -48,5 +48,18 @@ const validateUser = (req, res, next) => {
     }
 };
 exports.validateUser = validateUser;
+//#endregion
+//#region role validation
+const validateRole = (req, res, next) => {
+    const { error } = modelData.roleValidationSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map((er) => er.message).join(",");
+        return next(new commonfunction_1.ExpressError(msg, 400));
+    }
+    else {
+        next();
+    }
+};
+exports.validateRole = validateRole;
 //#endregion
 //# sourceMappingURL=validator.js.map

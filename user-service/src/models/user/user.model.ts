@@ -32,7 +32,6 @@ export const saveUser=async(body)=>{
 
 export const updateUser=async(dataUser, userid)=>{
   const { detail, ...userData } = dataUser;
-
   const updateUserDB = await prisma.user.update({
     where: { id: userid },
     data: {
@@ -49,6 +48,8 @@ export const updateUser=async(dataUser, userid)=>{
   });
 
   return updateUserDB;
+
+
 }
 //#endregion
 
@@ -56,13 +57,14 @@ export const getAllUser=async(skip, limit)=>{
     return prisma.user.findMany({
         skip:skip,
         take:limit,
+        where:{isActive:true},
         orderBy:{
             createdDate:'desc'
         }
     })
 }
 
-export const dataUserExist=async(userId)=>{
+export const getUserById=async(userId)=>{
   const exist= await prisma.user.findUnique({
     where:{id:userId},
     include:{detail:true}
