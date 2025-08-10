@@ -7,8 +7,9 @@ exports.api_v1 = void 0;
 const express_1 = __importDefault(require("express"));
 const user_routes_1 = require("../routes/user/user.routes");
 const role_routes_1 = require("../routes/role/role.routes");
+const middleware_1 = require("../middleware");
 const api = express_1.default.Router();
-api.use('/user', user_routes_1.UserRoute);
-api.use('/role', role_routes_1.RoleRoute);
+api.use('/user', middleware_1.auth, user_routes_1.UserRoute);
+api.use('/role', middleware_1.auth, role_routes_1.RoleRoute);
 exports.api_v1 = api;
 //# sourceMappingURL=api_v1.js.map

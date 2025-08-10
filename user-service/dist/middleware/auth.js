@@ -8,7 +8,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const auth = (req, res, next) => {
     const token = req.header('Authorization');
     if (!token)
-        res.status(401).json({ message: 'No token, unauthorize' });
+        res.status(401).json({ message: 'No token, unauthorize', code: 401 });
     try {
         const decoded = jsonwebtoken_1.default.verify(token.split(' ')[1], process.env.ACCESS_TOKEN_SECRET);
         req.user = decoded;
