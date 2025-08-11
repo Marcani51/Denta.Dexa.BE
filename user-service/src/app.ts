@@ -9,7 +9,12 @@ import { api_v1 } from './api_versioning/api_v1';
 
 const app = express()
 dotenv.config()
-
+app.use(
+    cors({
+      origin: process.env.CORS
+      //origin:"https://kost-puce.vercel.app"
+    })
+  );
 app.use(helmet())
 
 const limiter=reteLimit({

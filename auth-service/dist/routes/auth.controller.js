@@ -28,6 +28,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         where: {
             AND: [{ username: req.body.username }, { password: req.body.password }],
         },
+        include: { detail: true }
     });
     if (!userDb)
         return res.status(401).json({

@@ -8,8 +8,8 @@ export const saveUser=async(body)=>{
     username: body.username,
     password: body.password,
     email: body.email,
-    createdDate: new Date(body.createdDate),
-    updateDate: new Date(body.updateDate),
+    createdDate: new Date(),
+    updateDate: new Date(),
     createdBy: body.createdBy,
     updateBy: body.updateBy,
     isActive: body.isActive,
@@ -57,10 +57,10 @@ export const getAllUser=async(skip, limit)=>{
     return prisma.user.findMany({
         skip:skip,
         take:limit,
-        where:{isActive:true},
         orderBy:{
             createdDate:'desc'
-        }
+        },
+        include:{detail:true}
     })
 }
 

@@ -6,12 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
+const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const api_v1_1 = require("./api_versioning/api_v1");
 const app = (0, express_1.default)();
 dotenv_1.default.config();
+app.use((0, cors_1.default)({
+    origin: process.env.CORS
+    //origin:"https://kost-puce.vercel.app"
+}));
 app.use((0, helmet_1.default)());
 const limiter = (0, express_rate_limit_1.default)({
     windowMs: 15 * 60 * 1000, // 15 minutes

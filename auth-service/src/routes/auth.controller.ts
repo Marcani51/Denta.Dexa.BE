@@ -18,6 +18,7 @@ export const login = async (req: Request, res: Response) => {
     where: {
       AND: [{ username: req.body.username }, { password: req.body.password }],
     },
+    include:{detail:true}
   });
 
   if (!userDb)

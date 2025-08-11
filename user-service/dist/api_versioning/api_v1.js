@@ -9,6 +9,7 @@ const user_routes_1 = require("../routes/user/user.routes");
 const role_routes_1 = require("../routes/role/role.routes");
 const middleware_1 = require("../middleware");
 const api = express_1.default.Router();
+api.use('/usernoauth', user_routes_1.UserRoute);
 api.use('/user', middleware_1.auth, user_routes_1.UserRoute);
 api.use('/role', middleware_1.auth, role_routes_1.RoleRoute);
 exports.api_v1 = api;

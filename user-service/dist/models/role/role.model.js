@@ -30,8 +30,8 @@ const saveRole = (body) => __awaiter(void 0, void 0, void 0, function* () {
         data: {
             roleName: body.roleName,
             isActive: body.isActive,
-            createdDate: body.createdDate,
-            updateDate: body.updateDate,
+            createdDate: new Date(),
+            updateDate: new Date(),
             createdBy: body.createdBy,
             updateBy: body.updateBy,
             access: {
@@ -52,6 +52,7 @@ const getAllRole = (skip, limit) => __awaiter(void 0, void 0, void 0, function* 
         orderBy: {
             createdDate: "desc",
         },
+        include: { access: true }
     });
 });
 exports.getAllRole = getAllRole;

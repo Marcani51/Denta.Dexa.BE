@@ -30,8 +30,8 @@ const saveUser = (body) => __awaiter(void 0, void 0, void 0, function* () {
             username: body.username,
             password: body.password,
             email: body.email,
-            createdDate: new Date(body.createdDate),
-            updateDate: new Date(body.updateDate),
+            createdDate: new Date(),
+            updateDate: new Date(),
             createdBy: body.createdBy,
             updateBy: body.updateBy,
             isActive: body.isActive,
@@ -71,10 +71,10 @@ const getAllUser = (skip, limit) => __awaiter(void 0, void 0, void 0, function* 
     return prisma.user.findMany({
         skip: skip,
         take: limit,
-        where: { isActive: true },
         orderBy: {
             createdDate: 'desc'
-        }
+        },
+        include: { detail: true }
     });
 });
 exports.getAllUser = getAllUser;
