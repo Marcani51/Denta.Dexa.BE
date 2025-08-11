@@ -9,8 +9,8 @@ exports.userValidationSchema = joi_1.default.object({
     username: joi_1.default.string().min(3).max(50).required(),
     password: joi_1.default.string().min(6).required(),
     email: joi_1.default.string().email().required(),
-    createdDate: joi_1.default.date(),
-    updateDate: joi_1.default.date(),
+    createdDate: joi_1.default.date().optional().allow(null),
+    updateDate: joi_1.default.date().optional().allow(null),
     createdBy: joi_1.default.string().required(),
     updateBy: joi_1.default.string().required(),
     isActive: joi_1.default.boolean().required(),
@@ -20,8 +20,8 @@ exports.userValidationSchema = joi_1.default.object({
         gender: joi_1.default.string().valid("MALE", "FEMALE").required(),
         address: joi_1.default.string().required(),
         position: joi_1.default.string().required(),
-        createdDate: joi_1.default.date(),
-        updateDate: joi_1.default.date(),
+        createdDate: joi_1.default.date().optional().allow(null),
+        updateDate: joi_1.default.date().optional().allow(null),
         createdBy: joi_1.default.string().required(),
         updateBy: joi_1.default.string().required()
     }).required()

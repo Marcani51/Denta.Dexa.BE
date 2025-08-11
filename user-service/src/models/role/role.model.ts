@@ -7,8 +7,8 @@ export const saveRole = async (body) => {
     data: {
       roleName: body.roleName,
       isActive: body.isActive,
-      createdDate: body.createdDate,
-      updateDate: body.updateDate,
+      createdDate: new Date(),
+      updateDate: new Date(),
       createdBy: body.createdBy,
       updateBy: body.updateBy,
       access: {
@@ -29,6 +29,7 @@ export const getAllRole = async (skip, limit) => {
     orderBy: {
       createdDate: "desc",
     },
+    include:{access:true}
   });
 };
 

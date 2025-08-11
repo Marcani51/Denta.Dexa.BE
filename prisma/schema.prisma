@@ -18,11 +18,11 @@ model User {
   username    String     @unique
   password    String     @unique
   email       String     @unique
-  roleId      String?    @unique
+  roleId      String?    
   detailId    String     @unique
   detail      DetailUser @relation(fields: [detailId], references: [id])
-  createdDate DateTime
-  updateDate  DateTime
+  createdDate DateTime?
+  updateDate  DateTime?
   createdBy   String
   updateBy    String
   isActive    Boolean
@@ -35,8 +35,8 @@ model DetailUser {
   gender      Gender
   address     String
   position    String
-  createdDate DateTime
-  updateDate  DateTime
+  createdDate DateTime?
+  updateDate  DateTime?
   createdBy   String
   updateBy    String
   user        User?
@@ -46,8 +46,8 @@ model Role {
   id          String   @id @default(uuid())
   roleName    String
   isActive    Boolean
-  createdDate DateTime
-  updateDate  DateTime
+  createdDate DateTime?
+  updateDate  DateTime?
   createdBy   String
   updateBy    String
   access      Access?
