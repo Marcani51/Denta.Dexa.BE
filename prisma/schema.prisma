@@ -18,7 +18,7 @@ model User {
   username    String     @unique
   password    String     @unique
   email       String     @unique
-  roleId      String?    
+  roleId      String?
   detailId    String     @unique
   detail      DetailUser @relation(fields: [detailId], references: [id])
   createdDate DateTime?
@@ -26,10 +26,21 @@ model User {
   createdBy   String
   updateBy    String
   isActive    Boolean
+  Absence     Absence[]
+}
+
+model Absence {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  timestamp   DateTime  @default(now())
+  photoUrl    String 
+  createdDate DateTime? @default(now())
+  updateDate  DateTime?
 }
 
 model DetailUser {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
   phone       String
   gender      Gender
@@ -43,7 +54,7 @@ model DetailUser {
 }
 
 model Role {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   roleName    String
   isActive    Boolean
   createdDate DateTime?

@@ -8,8 +8,8 @@ const joi_1 = __importDefault(require("joi"));
 exports.roleValidationSchema = joi_1.default.object({
     roleName: joi_1.default.string().min(3).max(50).required(),
     isActive: joi_1.default.boolean().required(),
-    createdDate: joi_1.default.date().optional(),
-    updateDate: joi_1.default.date().optional(),
+    createdDate: joi_1.default.date().optional().allow(null),
+    updateDate: joi_1.default.date().optional().allow(null),
     createdBy: joi_1.default.string().required(),
     updateBy: joi_1.default.string().required(),
     access: joi_1.default.object({

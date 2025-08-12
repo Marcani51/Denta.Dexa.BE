@@ -29,8 +29,6 @@ export const httpGetAllUser = async (req: Request, res: Response) => {
   try {
     const { skip, limit } = getPagination(req.query);
     if (req.query.search != undefined) {
-      console.log(req.query.search);
-      console.log("WAH PARAM");
       return res.status(200).json(req.query.search);
     } else {
       const user = await userFunction.getAllUser(skip, limit);
@@ -64,6 +62,7 @@ export const httpUpdateUser = async (req: Request, res: Response) => {
     }
 
     const update = await userFunction.updateUser(updateData, userId);
+
     return res.status(200).json(update);
   } catch (err) {
     errorHandling(err, req, res);
