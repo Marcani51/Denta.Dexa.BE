@@ -70,8 +70,6 @@ const httpGetAllUser = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { skip, limit } = (0, query_1.getPagination)(req.query);
         if (req.query.search != undefined) {
-            console.log(req.query.search);
-            console.log("WAH PARAM");
             return res.status(200).json(req.query.search);
         }
         else {
