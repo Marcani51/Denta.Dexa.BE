@@ -15,7 +15,7 @@ app.use(
   );
 app.use(express.json());
 app.use("/v1", api_v1);
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.get("/download/:filename", (req, res) => {
   const filePath = path.join(__dirname, "../uploads", req.params.filename);
   res.download(filePath, (err) => {
