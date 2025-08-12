@@ -4,11 +4,11 @@ import cors from "cors";
 import helmet from "helmet"
 import dotenv from 'dotenv'; 
 import reteLimit from "express-rate-limit"
-
+import path from "path"
 import { api_v1 } from './api_versioning/api_v1';
 
 const app = express()
-dotenv.config()
+dotenv.config({ path: path.resolve(__dirname, '.env') })
 app.use(
     cors({
       origin: process.env.CORS

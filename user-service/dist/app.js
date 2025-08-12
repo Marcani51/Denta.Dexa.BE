@@ -10,9 +10,10 @@ const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const path_1 = __importDefault(require("path"));
 const api_v1_1 = require("./api_versioning/api_v1");
 const app = (0, express_1.default)();
-dotenv_1.default.config();
+dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '.env') });
 app.use((0, cors_1.default)({
     origin: process.env.CORS
     //origin:"https://kost-puce.vercel.app"
