@@ -2,18 +2,28 @@ import express from 'express'
 import * as AbsenceFunction from './absence.controller'
 import multer from "multer";
 import path from "path";
+import fs from 'fs'
 
 const absenceRoute=express.Router()
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log('Folder uploads berhasil dibuat di:', uploadsDir);
+}
 
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, "uploads/"); // Folder penyimpanan foto
+  destination: (req, file, cb) => {
+    const uploadsDir = path.join(__dirname, 'uploads');
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    cb(null, uploadsDir);
   },
-  filename: (_req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
 });
+
 const upload = multer({ storage });
 
 absenceRoute.post("/", upload.single("photo"), AbsenceFunction.httpAddNewAbsence)
